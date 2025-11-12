@@ -3,28 +3,24 @@
 using namespace std;
 
 // -----------------------------------------------------------
-// Function: bubbleSort
-// Purpose: Sort an array using the Bubble Sort algorithm.
+// Function: insertionSort
+// Purpose: Sort an array using Insertion Sort (two for loops)
 // -----------------------------------------------------------
-void bubbleSort(vector<int>& arr) {
+void insertionSort(vector<int>& arr) {
     int n = arr.size();
 
-    // Outer loop – runs n-1 times
-    for (int i = 0; i < n - 1; i++) {
-        bool swapped = false;  // Flag to detect if any swap happened
-
-        // Inner loop – compare adjacent elements
-        for (int j = 0; j < n - i - 1; j++) {
-            // If current element is greater than next, swap them
-            if (arr[j] > arr[j + 1]) {
-                swap(arr[j], arr[j + 1]);
-                swapped = true;
+    // Outer loop: pick each element starting from index 1
+    for (int i = 1; i < n; i++) {
+        // Inner loop: shift elements to the right to insert arr[i] at correct position
+        for (int j = i; j > 0; j--) {
+            // If the current element is smaller than its previous one → swap them
+            if (arr[j] < arr[j - 1]) {
+                swap(arr[j], arr[j - 1]);
             }
-        }
-
-        // If no two elements were swapped, array is already sorted
-        if (!swapped) {
-            break;
+            else {
+                // If it's already in correct order, stop shifting
+                break;
+            }
         }
     }
 }
@@ -49,7 +45,7 @@ int main() {
     cout << "Original array: ";
     printArray(arr);
 
-    bubbleSort(arr);
+    insertionSort(arr);
 
     cout << "Sorted array: ";
     printArray(arr);
